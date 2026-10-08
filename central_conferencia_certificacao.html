@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central de Conferência de Certificação</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f6f9;color:#1f2937}
+.header{background:#17324d;color:#fff;padding:28px 20px;text-align:center}
+.header h1{margin:0;font-size:26px}.header p{margin:8px 0 0;opacity:.9}
+.container{max-width:760px;margin:38px auto;padding:0 18px}
+.card{background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.08);padding:30px}
+.badge{display:inline-block;background:#e9f2f9;color:#17324d;padding:7px 12px;border-radius:20px;font-size:13px;font-weight:bold}
+h2{font-size:22px;margin:18px 0 8px;color:#17324d}
+.subtitle{color:#667085;line-height:1.5}
+label{display:block;font-weight:bold;margin:24px 0 8px}
+input{width:100%;padding:15px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;outline:none}
+input:focus{border-color:#17324d;box-shadow:0 0 0 3px rgba(23,50,77,.1)}
+button{width:100%;margin-top:16px;padding:15px;border:0;border-radius:9px;background:#17324d;color:#fff;font-size:16px;font-weight:bold;cursor:pointer}
+button:hover{background:#10263a}
+.error{display:none;margin-top:14px;padding:12px;border-radius:8px;background:#fff0f0;color:#b42318}
+.result{display:none;margin-top:28px;border-top:1px solid #e5e7eb;padding-top:24px}
+.success{background:#ecfdf3;color:#027a48;padding:12px;border-radius:8px;font-weight:bold;margin-bottom:18px}
+.row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid #edf0f2;padding:12px 0;gap:14px}
+.row strong{color:#475467}
+.notice{margin-top:24px;padding:14px;background:#f8fafc;border-left:4px solid #94a3b8;font-size:13px;line-height:1.5;color:#475467}
+.footer{text-align:center;color:#667085;font-size:12px;padding:25px 15px}
+.code{font-family:monospace;letter-spacing:1px}
+@media(max-width:600px){.card{padding:22px}.row{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Central de Conferência de Certificação</h1>
+  <p>Consulta mediante código de conferência</p>
+</div>
+
+<div class="container">
+  <div class="card">
+    <span class="badge">CONFERÊNCIA DOCUMENTAL</span>
+    <h2>Consultar certificação</h2>
+    <p class="subtitle">
+      Digite o código de conferência informado no documento para consultar os dados cadastrados.
+    </p>
+
+    <label for="codigo">Código de Conferência</label>
+    <input id="codigo" type="text" autocomplete="off"
+           placeholder="Digite o código de conferência">
+    <button onclick="conferir()">CONFERIR CERTIFICAÇÃO</button>
+
+    <div id="erro" class="error">
+      Código não localizado. Verifique a informação digitada e tente novamente.
+    </div>
+
+    <div id="resultado" class="result">
+      <div class="success">✓ CERTIFICAÇÃO LOCALIZADA PARA CONFERÊNCIA</div>
+
+      <div class="row"><strong>Curso</strong><span>MBA em Supply Chain Management e Logística</span></div>
+      <div class="row"><strong>Carga horária</strong><span>360 horas</span></div>
+      <div class="row"><strong>Titular</strong><span>Roberto Ataíde Batalha de Araújo</span></div>
+      <div class="row"><strong>Data de emissão</strong><span>13/07/2023</span></div>
+      <div class="row"><strong>Instituição de Ensino Superior</strong><span>Escola Superior do Sul de Santa Catarina</span></div>
+      <div class="row"><strong>Código da IES</strong><span>25478</span></div>
+      <div class="row"><strong>Mantenedora</strong><span>Sociedade de Educação Superior e Cultura Brasil S.A.</span></div>
+      <div class="row"><strong>CNPJ</strong><span>84.684.182/0001-57</span></div>
+      <div class="row"><strong>Situação informada</strong><span>Ativa</span></div>
+      <div class="row"><strong>Processo de Unificação de Mantidas</strong><span>nº 202611215</span></div>
+      <div class="row"><strong>Código de conferência</strong><span class="code">MBA-SCM-RA-13072023</span></div>
+
+      <div class="notice">
+        <strong>Importante:</strong> esta página apresenta os dados destinados à conferência
+        das informações da certificação. A autenticidade e validade oficial do certificado
+        devem ser confirmadas junto à instituição emissora ou por meio de seu sistema oficial
+        de validação, quando disponível.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Página de conferência informativa • Não substitui mecanismo oficial de autenticação da IES
+</div>
+
+<script>
+function conferir(){
+  const esperado = "MBA-SCM-RA-13072023";
+  const digitado = document.getElementById("codigo").value.trim().toUpperCase();
+  const resultado = document.getElementById("resultado");
+  const erro = document.getElementById("erro");
+
+  if(digitado === esperado){
+    resultado.style.display = "block";
+    erro.style.display = "none";
+  } else {
+    resultado.style.display = "none";
+    erro.style.display = "block";
+  }
+}
+document.getElementById("codigo").addEventListener("keydown", function(e){
+  if(e.key === "Enter") conferir();
+});
+</script>
+</body>
+</html>
